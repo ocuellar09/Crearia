@@ -1,6 +1,5 @@
-from fastapi import FastAPI
-from app.api.endpoints import router
+from app.main import app
+import uvicorn
 
-app = FastAPI(title="Agente de Voz")
-
-app.include_router(router)
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
