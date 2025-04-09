@@ -7,6 +7,7 @@ router = APIRouter()
 async def root():
     return {"message": "Agente de voz en funcionamiento 🎤"}
 
-@router.api_route("/health", methods=["GET", "HEAD"], include_in_schema=False)
-async def health_check(request: Request):
-    return JSONResponse(content={"status": "healthy"})
+# Eliminamos este endpoint ya que ahora está en main.py
+# @router.api_route("/health", methods=["GET", "HEAD"], include_in_schema=False)
+# async def health_check(request: Request):
+#     return JSONResponse(content={"status": "healthy"})
