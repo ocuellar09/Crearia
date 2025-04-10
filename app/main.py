@@ -1,15 +1,14 @@
 from fastapi import FastAPI
-from app.api.endpoints import router
-from fastapi.routing import APIRouter
-from fastapi.responses import HTMLResponse
+from app.api.whatsapp import router as whatsapp_router
+from app.core.config import settings
+import logging
 
-app = FastAPI(title="Agente de Voz")
+app = FastAPI(title=settings.project_name)
+
+logging.basicConfig(level=settings.log_level.upper())
 
 @app.get("/health", include_in_schema=False)
 def health_check():
-    return HTMLResponse(content="OK")
+    return {"status": "healthy"}
 
-main_router = APIRouter()
-main_router.include_router(router, prefix="/agente-voz")
-
-app.include_router(main_router)
+app.include_router(whatsapp_router, prefix="/agente-voz", tags=["WhatsApp Webhook"])
